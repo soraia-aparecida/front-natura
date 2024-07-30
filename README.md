@@ -32,3 +32,6 @@ $ touch .env
 $ npm install
 $ npm run start
 ```
+
+### Url de acesso
+- https://front-natura-61c9e48aa08f.herokuapp.com
