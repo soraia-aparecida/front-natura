@@ -19,7 +19,8 @@ const CardSummary = ({ subtotal, discount, shipping, total, onCheckout, setDisco
       setDiscount(valueDiscount);
     } catch (error) {
       console.error('Erro ao adicionar ao carrinho:', error?.response?.data?.message);
-      const message = error?.response?.data?.message ?? "Falha ao buscar o cupom"
+      const message = error?.response?.data?.message ?? "Falha ao buscar o cupom";
+      setDiscount(0);
       Swal.fire({
         title: "Erro",
         text: message,

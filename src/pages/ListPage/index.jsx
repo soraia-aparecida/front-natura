@@ -13,6 +13,9 @@ const List = () => {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const [products, setProducts] = useState([]);
+  const queryParams = new URLSearchParams(window.location.search);
+  const categoryId = queryParams.get('categoria');
+  const nome = queryParams.get('nome');
 
   const getItems = async () => {
     try {
@@ -38,7 +41,7 @@ const List = () => {
   const handleLoadMore = async () => {
     setLoadingMore(true);
     try {
-      const response = await getProducts({ page: page + 1, perPage: 4 });
+      const response = await getProducts({ page: page + 1, perPage: 4, ...(nome && { text: nome }), ...(categoryId && { categoryId }) });
       setters.setProducts((prevProducts) => [
         ...prevProducts,
         ...response,

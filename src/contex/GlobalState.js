@@ -75,7 +75,7 @@ const GlobalState = (props) => {
 
     const states = { cart, loading, products, category }
     const setters = { setCart, setLoading, setProducts, setCategory }
-    const requests = { registerNewUser, addItem, updateItem, getCategories, removeItem }
+    const requests = { registerNewUser, addItem, updateItem, getCategories, removeItem, createNewCart }
 
     return (
         <GlobalStateContext.Provider value={{ states, setters, requests }}>

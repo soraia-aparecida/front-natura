@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const CartPage = () => {
   const classes = useStyles();
   const [cart, setCart] = useState([]);
-  const { states, setters } = useContext(GlobalStateContext);
+  const { states, setters, requests } = useContext(GlobalStateContext);
   const [discount, setDiscount] = useState(0);
   const navigate = useNavigate();
 
@@ -31,11 +31,11 @@ const CartPage = () => {
       icon: "success",
       showCancelButton: false,
       confirmButtonText: "Ok",
-      confirmButtonColor:"#f48646"
-    }).then(() => {
+      confirmButtonColor: "#f48646"
+    }).then(async () => {
       localStorage.removeItem('cart');
       localStorage.removeItem('lastVisitedPage');
-      setters.setCart([]);
+      await requests.createNewCart();
 
       navigate("/");
       return;
