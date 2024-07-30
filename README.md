@@ -1,6 +1,6 @@
 # Projeto E-Commerce - Desafio Técnico Natura&Co
 
-EEste repositório contém o frontend para o desafio técnico da Natura&Co. O objetivo foi desenvolver a interface de um e-commerce inspirada no site da Natura, utilizando React e Material-UI para criar uma experiência de usuário moderna e responsiva.
+Este repositório contém o frontend para o desafio técnico da Natura&Co. O objetivo foi desenvolver a interface de um e-commerce inspirada no site da Natura, utilizando React e Material-UI para criar uma experiência de usuário moderna e responsiva.
 
 ## Funcionalidades
 
