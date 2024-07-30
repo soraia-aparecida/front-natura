@@ -19,7 +19,7 @@ const List = () => {
 
   const getItems = async () => {
     try {
-      const response = await getProducts({ page: 1, perPage: 4 });
+      const response = await getProducts({ page: 1, perPage: 4, ...(nome && { text: nome }), ...(categoryId && { categoryId }) });
       setters.setProducts(response);
       setHasMore(response?.length === 4);
       setPage(1);
