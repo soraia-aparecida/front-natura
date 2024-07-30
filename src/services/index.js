@@ -23,6 +23,7 @@ export const createCart = async () => {
         localStorage.setItem('cart', JSON.stringify(res))
     }).catch((err) => {
         console.log(err.response.data)
+        return err.response.data
     })
 }
 
@@ -34,8 +35,6 @@ export const addItems = async (body) => {
     }).then((res) => {
         localStorage.setItem('cart', JSON.stringify(res));
         return res;
-    }).catch((err) => {
-        console.log(err.response.data)
     })
 }
 
@@ -49,8 +48,6 @@ export const updateItems = async (id, quantity) => {
     }).then((res) => {
         localStorage.setItem('cart', JSON.stringify(res));
         return res;
-    }).catch((err) => {
-        console.log(err.response.data)
     })
 }
 
@@ -70,8 +67,6 @@ export const deleteItem = async (id) => {
 
         localStorage.setItem('cart', JSON.stringify(cart));
         return cart;
-    }).catch((err) => {
-        console.log(err.response.data)
     })
 }
 
@@ -83,6 +78,7 @@ export const getCategory = async () => {
         return res;
     }).catch((err) => {
         console.log(err.response.data)
+        return err.response.data
     })
 }
 
@@ -104,9 +100,6 @@ export const getProducts = async ({
         }
     }).then((res) => {
         return res?.products;
-    }).catch((err) => {
-        // alert(err.response.data)
-        console.error("err", err)
     })
 }
 
@@ -116,7 +109,5 @@ export const getVoucher = async (text) => {
         method: "GET"
     }).then((res) => {
         return res;
-    }).catch((err) => {
-        console.log(err.response.data)
     })
 }
