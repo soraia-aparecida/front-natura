@@ -66,13 +66,12 @@ const Header = () => {
 
   const handleSelectChange = async (event) => {
     const value = event.target.value;
-    const name = event.target.name;
     setSelectedOption(value);
 
     try {
       setters.setLoading(true);
 
-      const url = `/produtos?${name}`
+      const url = `/produtos?categoria=${value}`
       localStorage.setItem('lastVisitedPage', url);
       navigate(url);
 
@@ -94,7 +93,6 @@ const Header = () => {
     } finally {
       setters.setLoading(false);
     }
-    // }
   };
 
   const handlerClear = async () => {
@@ -122,7 +120,7 @@ const Header = () => {
       setters.setLoading(true);
       try {
 
-        const url = `/produtos`
+        const url = `/produtos?nome=${query}`
         localStorage.setItem('lastVisitedPage', url);
         navigate(url);
 
@@ -148,6 +146,7 @@ const Header = () => {
   useEffect(() => {
     if (!location.pathname.includes('/produtos')) {
       setSelectedOption('');
+      setText('');
     }
   }, [location]);
 

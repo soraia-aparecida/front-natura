@@ -1,9 +1,11 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import banner from "../../assets/banner-stella.jpg";
 import ProductCard from '../../components/ProductCard/ProductCard.jsx';
 import { useHomeStyles } from './HomePageStyles';
 import { getProducts } from '../../services/index.js';
+import { NaturaApiServices } from '../../services/NaturaApiServices.js';
+import GlobalStateContext from '../../contex/GlobalStateContext.js';
 
 const Home = () => {
     const classes = useHomeStyles();
@@ -11,6 +13,8 @@ const Home = () => {
     const [loadingMore, setLoadingMore] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
+    const api = new NaturaApiServices();
+    const { requests } = useContext(GlobalStateContext);
 
     const handleLoadMore = async () => {
         setLoadingMore(true);
@@ -31,6 +35,14 @@ const Home = () => {
 
     useEffect(() => {
         const initialLoad = async () => {
+            const authData = api.getAuthData();
+            if (!authData?.token) {
+                await requests.registerNewUser({
+                    isGuest: true,
+                    profile: "user"
+                })
+            }
+
             setLoadingMore(true);
             try {
                 const response = await getProducts({ page: 1, perPage: 4 });
