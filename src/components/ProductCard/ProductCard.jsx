@@ -4,6 +4,8 @@ import { Star as StarIcon, AddShoppingCart as AddShoppingCartIcon } from '@mui/i
 import ProductCardStyles from './ProductCardStyles';
 import { useTheme } from '@mui/material/styles';
 import GlobalStateContext from '../../contex/GlobalStateContext';
+import Swal from "sweetalert2";
+
 
 const ProductCard = ({ product }) => {
     const theme = useTheme();
@@ -27,6 +29,14 @@ const ProductCard = ({ product }) => {
             }
         } catch (error) {
             console.error('Erro ao adicionar ao carrinho:', error);
+            const message = error?.response?.data?.message ?? "Falha adicionar produto ao carrinho"
+            Swal.fire({
+              title: "Erro",
+              text: message,
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "Ok",
+            })
         } finally {
             setLoading(false);
         }

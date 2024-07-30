@@ -24,6 +24,8 @@ import { getProducts } from '../../services';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 
 import { useLocation } from 'react-router-dom';
+import Swal from "sweetalert2";
+
 
 const Header = () => {
   const { states, setters } = useContext(GlobalStateContext);
@@ -90,6 +92,14 @@ const Header = () => {
     } catch (error) {
       setters.setLoading(false);
       console.error('Erro ao buscar cupom:', error);
+      const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+      Swal.fire({
+        title: "Erro",
+        text: message,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+      })
     } finally {
       setters.setLoading(false);
     }
@@ -110,6 +120,14 @@ const Header = () => {
     } catch (error) {
       setters.setLoading(false);
       console.error('Erro ao buscar cupom:', error);
+      const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+      Swal.fire({
+        title: "Erro",
+        text: message,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+      })
     } finally {
       setters.setLoading(false);
     }
@@ -130,6 +148,14 @@ const Header = () => {
       } catch (error) {
         setters.setLoading(false);
         console.error('Erro ao buscar cupom:', error);
+        const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+        Swal.fire({
+          title: "Erro",
+          text: message,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonText: "Ok",
+        })
       } finally {
         setters.setLoading(false);
       }

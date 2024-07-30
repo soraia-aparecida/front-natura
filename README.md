@@ -29,8 +29,8 @@ $ cd "diretorio de sua preferencia"
 $ git clone https://github.com/soraia-aparecida/front-natura.git
 $ cd front-natura
 $ touch .env
-$ npm install
-$ npm run start
+$ yarn install
+$ yarn run start
 ```
 
 ### Url de acesso

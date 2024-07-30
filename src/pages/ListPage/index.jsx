@@ -4,6 +4,7 @@ import ProductList from '../../components/ProductList/ProductList';
 import GlobalStateContext from '../../contex/GlobalStateContext';
 import { getProducts } from '../../services';
 import { Container, LoadingContainer, LoadMoreButtonContainer, NoResultsContainer, NoResultsIcon } from './ListPageStyles';
+import Swal from "sweetalert2";
 
 const List = () => {
   const { states, setters } = useContext(GlobalStateContext);
@@ -21,6 +22,14 @@ const List = () => {
       setPage(1);
     } catch (error) {
       console.error('Erro ao carregar produtos iniciais:', error);
+      const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+      Swal.fire({
+        title: "Erro",
+        text: message,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+      })
     } finally {
       setters.setLoading(false);
     }
@@ -29,7 +38,7 @@ const List = () => {
   const handleLoadMore = async () => {
     setLoadingMore(true);
     try {
-      const response = await getProducts({page: page + 1, perPage: 4});
+      const response = await getProducts({ page: page + 1, perPage: 4 });
       setters.setProducts((prevProducts) => [
         ...prevProducts,
         ...response,
@@ -38,6 +47,14 @@ const List = () => {
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error('Erro ao carregar mais produtos:', error);
+      const message = error?.response?.data?.message ?? "Falha ao buscar produtos";
+      Swal.fire({
+        title: "Erro",
+        text: message,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+      })
     } finally {
       setLoadingMore(false);
     }

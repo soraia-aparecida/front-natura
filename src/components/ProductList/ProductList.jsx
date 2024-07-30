@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Box, Typography, Button, Card, CardContent, CardMedia, CircularProgress } from '@mui/material';
 import { ShoppingCart as ShoppingCartIcon } from '@mui/icons-material';
-import ProductListStyles from './ProductListStyles'; // Ajuste o caminho conforme necessário
+import ProductListStyles from './ProductListStyles';
 import { useTheme } from '@mui/material/styles';
 import GlobalStateContext from '../../contex/GlobalStateContext';
+import Swal from "sweetalert2";
 
 const ProductList = (data) => {
     const { image, title, description, price, id, discount, discountPercentage, oldPrice } = data;
@@ -26,6 +27,14 @@ const ProductList = (data) => {
             }
         } catch (error) {
             console.error('Erro ao adicionar ao carrinho:', error);
+            const message = error?.response?.data?.message ?? "Falha adicionar produto ao carrinho"
+            Swal.fire({
+              title: "Erro",
+              text: message,
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonText: "Ok",
+            })
         } finally {
             setLoading(false);
         }

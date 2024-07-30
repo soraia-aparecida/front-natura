@@ -3,6 +3,7 @@ import { Box, Button, Divider, InputAdornment, TextField, Typography } from '@mu
 import React, { useState } from 'react';
 import useStyles from './CardSummaryStyles';
 import { getVoucher } from '../../services';
+import Swal from "sweetalert2";
 
 const CardSummary = ({ subtotal, discount, shipping, total, onCheckout, setDiscount }) => {
 
@@ -17,7 +18,15 @@ const CardSummary = ({ subtotal, discount, shipping, total, onCheckout, setDisco
       const valueDiscount = res?.type === "fixed​" ? res?.price : (res?.price / 100)
       setDiscount(valueDiscount);
     } catch (error) {
-      console.error('Erro ao adicionar ao carrinho:', error);
+      console.error('Erro ao adicionar ao carrinho:', error?.response?.data?.message);
+      const message = error?.response?.data?.message ?? "Falha ao buscar o cupom"
+      Swal.fire({
+        title: "Erro",
+        text: message,
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: "Ok",
+      })
     } finally {
       setLoading(false);
     }

@@ -6,6 +6,7 @@ import { useHomeStyles } from './HomePageStyles';
 import { getProducts } from '../../services/index.js';
 import { NaturaApiServices } from '../../services/NaturaApiServices.js';
 import GlobalStateContext from '../../contex/GlobalStateContext.js';
+import Swal from "sweetalert2";
 
 const Home = () => {
     const classes = useHomeStyles();
@@ -28,6 +29,14 @@ const Home = () => {
             setPage((prevPage) => prevPage + 1);
         } catch (error) {
             console.error('Erro ao carregar mais produtos:', error);
+            const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+            Swal.fire({
+                title: "Erro",
+                text: message,
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonText: "Ok",
+            })
         } finally {
             setLoadingMore(false);
         }
@@ -51,6 +60,14 @@ const Home = () => {
                 setPage(1);
             } catch (error) {
                 console.error('Erro ao carregar produtos iniciais:', error);
+                const message = error?.response?.data?.message ?? "Falha ao buscar produtos"
+                Swal.fire({
+                    title: "Erro",
+                    text: message,
+                    icon: "error",
+                    showCancelButton: false,
+                    confirmButtonText: "Ok",
+                })
             } finally {
                 setLoadingMore(false);
             }
