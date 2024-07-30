@@ -35,3 +35,7 @@ $ yarn run start
 
 ### Url de acesso
 - https://front-natura-61c9e48aa08f.herokuapp.com
+
+### Cupons de desconto ativos:
+- DESCONTO25
+- DESCONTO50
