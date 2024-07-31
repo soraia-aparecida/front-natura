@@ -81,7 +81,7 @@ const CardSummary = ({ subtotal, discount, shipping, total, onCheckout, setDisco
           }}
           className={classes.couponInput}
         />
-        <Button variant="contained" color="primary" disabled={loading} onClick={() => handleApplyCoupon()}>{loading ? "Carregando..." : "Aplicar"}</Button>
+        <Button variant="contained" color="primary" disabled={loading || !text} onClick={() => handleApplyCoupon()}>{loading ? "Carregando..." : "Aplicar"}</Button>
       </Box>
       <Button
         className={classes.checkoutButton}

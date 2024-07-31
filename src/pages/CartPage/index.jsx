@@ -33,11 +33,11 @@ const CartPage = () => {
       confirmButtonText: "Ok",
       confirmButtonColor: "#f48646"
     }).then(async () => {
+      navigate("/");
       localStorage.removeItem('cart');
       localStorage.removeItem('lastVisitedPage');
       await requests.createNewCart();
 
-      navigate("/");
       return;
     });
   }
