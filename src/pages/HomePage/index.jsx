@@ -20,7 +20,7 @@ const Home = () => {
     const handleLoadMore = async () => {
         setLoadingMore(true);
         try {
-            const response = await getProducts({ page: page + 1, perPage: 4 });
+            const response = await getProducts({ page: page + 1, perPage: 4, categoryId: 1 });
             setProducts((prevProducts) => [
                 ...prevProducts,
                 ...response,
@@ -54,7 +54,7 @@ const Home = () => {
 
             setLoadingMore(true);
             try {
-                const response = await getProducts({ page: 1, perPage: 4 });
+                const response = await getProducts({ page: 1, perPage: 4, categoryId: 1 });
                 setProducts(response);
                 setHasMore(response.length === 4);
                 setPage(1);
