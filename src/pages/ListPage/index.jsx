@@ -42,10 +42,13 @@ const List = () => {
     setLoadingMore(true);
     try {
       const response = await getProducts({ page: page + 1, perPage: 4, ...(nome && { text: nome }), ...(categoryId && { categoryId }) });
-      setters.setProducts((prevProducts) => [
-        ...prevProducts,
-        ...response,
-      ]);
+
+      setters.setProducts((prevProducts) => {
+        const existingProductIds = new Set(prevProducts.map(product => product.id));
+        const uniqueNewProducts = response?.filter(product => !existingProductIds.has(product.id));
+
+        return [...prevProducts, ...uniqueNewProducts];
+      });
       setHasMore(response?.length === 4);
       setPage((prevPage) => prevPage + 1);
     } catch (error) {
